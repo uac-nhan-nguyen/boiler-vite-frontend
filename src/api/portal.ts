@@ -1,5 +1,5 @@
 import * as axios from 'axios'
-import {IConfig} from "interface/portal";
+import {IConfig, IPage} from "interface/portal";
 
 const x = new axios.Axios({
   baseURL: import.meta.env.VITE_API
@@ -8,7 +8,11 @@ const x = new axios.Axios({
 export abstract class PortalAPI {
   static async getConfig () {
     const r = await x.get('/portal');
-    console.log(r.data)
     return JSON.parse(r.data) as IConfig;
+  }
+
+  static async getPage(key: string) {
+    const r = await x.get(`/portal/${key}`);
+    return JSON.parse(r.data) as IPage;
   }
 }

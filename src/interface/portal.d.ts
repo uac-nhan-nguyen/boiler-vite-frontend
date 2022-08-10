@@ -1,7 +1,14 @@
 export interface IConfig {
-  menus: {
-    key: string
-    label: string
-  }[],
+  menus: IMenu[],
+}
+
+interface IMenu {
+  key: string
+  label: string
+  items?: IMenu[]
+}
+
+export interface IPage {
+  title?: string;
 }
 
