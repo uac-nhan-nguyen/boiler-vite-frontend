@@ -1,1 +1,2 @@
-# hedera-portal
+# Generic portal controlled by backend
+
