@@ -3,14 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "start:marketplace": "vite --mode marketplace",
-    "start:hedera": "vite --mode hedera",
+    "start:dev": "vite --mode dev",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "autoprefixer": "^10.4.8",
     "axios": "^0.27.2",
+    "classnames": "^2.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0"

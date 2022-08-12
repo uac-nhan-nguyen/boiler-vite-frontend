@@ -1,24 +1,42 @@
-import {useConfig} from "./hooks/useConfig";
-import {Sidebar} from "./components/Sidebar";
-import {useState} from "react";
-import {Page} from "./components/Page";
+import {Menu} from "components/Menu";
+import {useEffect, useState} from "react";
+import {Route, Routes} from "react-router-dom";
+import {ROUTES} from "common/routes";
+import {MENUS} from "common/menus";
+
+export interface IRoute {
+  path: string;
+  title: string;
+  exact: boolean;
+  component: () => JSX.Element,
+}
+
+const RouteComponentWithTitle = (props: {
+  title: string;
+  element: () => JSX.Element;
+}) => {
+  useEffect(() => {
+    document.title = (props.title ? `${props.title} - ` : '') + 'Sound Rig';
+  }, [props.title]);
+  const Component = props.element;
+  return <Component/>;
+};
+
+const createRoute = (route: IRoute, index: number) => {
+  const Component = () =>
+    RouteComponentWithTitle({title: route.title, element: route.component});
+  return (
+    <Route key={`route-${index}`} path={route.path} element={<Component/>}/>
+  );
+};
+
 
 function App() {
-  const [config] = useConfig()
-  const [page, setPage] = useState<string | undefined>();
-  console.log('RENDER')
-
-  if (!config){
-    console.log('loading...')
-    return <div className={'App'}>
-      Loading...
-    </div>
-  }
 
   return (
     <div className="App">
-      <Sidebar config={config} onMenuSelected={(k) => setPage(k)}/>
-      {page && <Page id={page} />}
+      <Menu menus={MENUS}/>
+      <Routes>{ROUTES.map(createRoute)}</Routes>
     </div>
   )
 }

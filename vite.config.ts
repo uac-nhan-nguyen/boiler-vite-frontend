@@ -5,4 +5,12 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   envDir: 'env',
+  resolve: {
+    alias: {
+      components: 'src/components',
+      common: 'src/common',
+      api: 'src/api',
+      hooks: 'src/hooks',
+    }
+  },
 })
